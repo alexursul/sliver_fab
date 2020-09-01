@@ -22,12 +22,15 @@ class SliverFab extends StatefulWidget {
   ///Position of the widget.
   final FloatingPosition floatingPosition;
 
+  final SliverFabController controller;
+
   SliverFab({
     @required this.slivers,
     @required this.floatingWidget,
     this.floatingPosition = const FloatingPosition(right: 16.0),
     this.expandedHeight = 256.0,
     this.topScalingEdge = 96.0,
+    this.controller,
   }) {
     assert(slivers != null);
     assert(floatingWidget != null);
@@ -50,6 +53,11 @@ class SliverFabState extends State<SliverFab> {
     super.initState();
     scrollController = new ScrollController();
     scrollController.addListener(() => setState(() {}));
+    if (widget.controller != null) {
+      widget.controller.rebuild = () {
+        setState(() {});
+      };
+    }
   }
 
   @override
@@ -126,4 +134,10 @@ class FloatingPosition {
   final double left;
 
   const FloatingPosition({this.top, this.right, this.left});
+}
+
+class SliverFabController {
+  Function rebuild;
+
+  SliverFabController();
 }

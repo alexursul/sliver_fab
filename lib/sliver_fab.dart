@@ -57,6 +57,7 @@ class SliverFabState extends State<SliverFab> {
       widget.controller.rebuild = () {
         setState(() {});
       };
+      widget.controller.scrollController = scrollController;
     }
   }
 
@@ -138,6 +139,7 @@ class FloatingPosition {
 
 class SliverFabController {
   Function rebuild;
+  ScrollController scrollController;
 
   SliverFabController();
 }

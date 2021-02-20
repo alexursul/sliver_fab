@@ -24,6 +24,8 @@ class SliverFab extends StatefulWidget {
 
   final SliverFabController controller;
 
+  final Key customScrollViewKey;
+
   SliverFab({
     @required this.slivers,
     @required this.floatingWidget,
@@ -31,6 +33,7 @@ class SliverFab extends StatefulWidget {
     this.expandedHeight = 256.0,
     this.topScalingEdge = 96.0,
     this.controller,
+    this.customScrollViewKey,
   }) {
     assert(slivers != null);
     assert(floatingWidget != null);
@@ -72,6 +75,7 @@ class SliverFabState extends State<SliverFab> {
     return Stack(
       children: <Widget>[
         CustomScrollView(
+          key: widget.customScrollViewKey,
           controller: scrollController,
           slivers: widget.slivers,
         ),

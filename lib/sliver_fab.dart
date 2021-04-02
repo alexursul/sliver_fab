@@ -22,25 +22,19 @@ class SliverFab extends StatefulWidget {
   ///Position of the widget.
   final FloatingPosition floatingPosition;
 
-  final SliverFabController controller;
+  final SliverFabController? controller;
 
-  final Key customScrollViewKey;
+  final Key? customScrollViewKey;
 
   SliverFab({
-    @required this.slivers,
-    @required this.floatingWidget,
+    required this.slivers,
+    required this.floatingWidget,
     this.floatingPosition = const FloatingPosition(right: 16.0),
     this.expandedHeight = 256.0,
     this.topScalingEdge = 96.0,
     this.controller,
     this.customScrollViewKey,
-  }) {
-    assert(slivers != null);
-    assert(floatingWidget != null);
-    assert(floatingPosition != null);
-    assert(expandedHeight != null);
-    assert(topScalingEdge != null);
-  }
+  });
 
   @override
   State<StatefulWidget> createState() {
@@ -49,7 +43,7 @@ class SliverFab extends StatefulWidget {
 }
 
 class SliverFabState extends State<SliverFab> {
-  ScrollController scrollController;
+  late ScrollController scrollController;
 
   @override
   void initState() {
@@ -57,10 +51,10 @@ class SliverFabState extends State<SliverFab> {
     scrollController = new ScrollController();
     scrollController.addListener(() => setState(() {}));
     if (widget.controller != null) {
-      widget.controller.rebuild = () {
+      widget.controller!.rebuild = () {
         setState(() {});
       };
-      widget.controller.scrollController = scrollController;
+      widget.controller!.scrollController = scrollController;
     }
   }
 
@@ -128,22 +122,22 @@ class FloatingPosition {
   ///Can be negative. Represents how much should you change the default position.
   ///E.g. if your widget is bigger than normal [FloatingActionButton] by 20 pixels,
   ///you can set it to -10 to make it stick to the edge
-  final double top;
+  final double? top;
 
   ///Margin from the right. Should be positive.
   ///The widget will stretch if both [right] and [left] are not nulls.
-  final double right;
+  final double? right;
 
   ///Margin from the left. Should be positive.
   ///The widget will stretch if both [right] and [left] are not nulls.
-  final double left;
+  final double? left;
 
   const FloatingPosition({this.top, this.right, this.left});
 }
 
 class SliverFabController {
-  Function rebuild;
-  ScrollController scrollController;
+  late Function rebuild;
+  late ScrollController scrollController;
 
   SliverFabController();
 }
